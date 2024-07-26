@@ -55,7 +55,6 @@ function FormSimple() {
   const [Day_v, setDay] = useState();
   const [Year_v, setYear] = useState();
 
-
   // const [checkedValues, setChecked] = useState([]);
 
   // const handleCheckBox = (event) => {
@@ -68,7 +67,6 @@ function FormSimple() {
   //     }
   //   })
   // }
-
 
   const [Age, setAge] = useState("");
   const [FullName, setFullName] = useState("");
@@ -122,31 +120,35 @@ function FormSimple() {
                 setUImageURL(Url);
               })
               .then(() => {
-                setDoc(doc(db, "users", userId), {
-                  age: Age,
-                  name: FullName,
-                  educational_status: EducationalStatus,
-                  foundation_level: FoundationLevel,
-                  cloth: cloth,
-                  size: size,
-                  payed: payed,
-                  birth_date: BirthDate,
-                  school_name: SchoolName,
-                  school_address: SchoolAddress,
-                  residential_address: ResidentialAddress,
-                  phone_number: PhoneNum,
-                  year_joined: YearJoined,
-                  email: Email,
-                  image: UImageURL,
-                  user_id: userId
-                })
-                  .then(() => {
-                    window.alert(FullName + " was successfully registered as an ARMY");
+                if (UImageURL == !"") {
+                  setDoc(doc(db, "users", userId), {
+                    age: Age,
+                    name: FullName,
+                    educational_status: EducationalStatus,
+                    foundation_level: FoundationLevel,
+                    cloth: cloth,
+                    size: size,
+                    payed: payed,
+                    birth_date: BirthDate,
+                    school_name: SchoolName,
+                    school_address: SchoolAddress,
+                    residential_address: ResidentialAddress,
+                    phone_number: PhoneNum,
+                    year_joined: YearJoined,
+                    email: Email,
+                    image: UImageURL,
+                    user_id: userId,
                   })
-                  .catch((err) => {
-                    window.alert("Failed to register user, check console for more information");
-                    console.log(err.message);
-                  });
+                    .then(() => {
+                      window.alert(FullName + " was successfully registered as an ARMY");
+                    })
+                    .catch((err) => {
+                      window.alert("Failed to register user, check console for more information");
+                      console.log(err.message);
+                    });
+                } else {
+                  window.alert ("Please click the button again")
+                }
               });
           })
           .catch((err) => {
@@ -188,8 +190,6 @@ function FormSimple() {
                     if (files) {
                       setImage(URL.createObjectURL(files[0]));
                       setUploadImg(files[0]);
-
-                     
                     }
                   }}
                 />
@@ -455,47 +455,47 @@ function FormSimple() {
                         name="size_radio"
                         className="flex_obligate"
                         onChange={() => setSize(event.target.value)}
-                      > 
-                      <div>
-                        <FormControlLabel
-                          value="S"
-                          color="info"
-                          control={<Radio size="large" />}
-                          label="Small"
-                        />
-                        <FormControlLabel
-                          value="M"
-                          color="info"
-                          control={<Radio size="large" />}
-                          label="Medium"
-                        />
-                        <FormControlLabel
-                          value="L"
-                          color="info"
-                          control={<Radio size="large" />}
-                          label="Large"
-                        />                    
-                      </div>
-                      <div>
-                        <FormControlLabel
-                          value="XL"
-                          color="info"
-                          control={<Radio size="large" />}
-                          label="X-Large"
-                        />
-                        <FormControlLabel
-                          value="2XL"
-                          color="info"
-                          control={<Radio size="large" />}
-                          label="2X-Large"
-                        />
-                        <FormControlLabel
-                          value="3XL"
-                          color="info"
-                          control={<Radio size="large" />}
-                          label="3X-Large"
-                        />                    
-                      </div>
+                      >
+                        <div>
+                          <FormControlLabel
+                            value="S"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Small"
+                          />
+                          <FormControlLabel
+                            value="M"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Medium"
+                          />
+                          <FormControlLabel
+                            value="L"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Large"
+                          />
+                        </div>
+                        <div>
+                          <FormControlLabel
+                            value="XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="X-Large"
+                          />
+                          <FormControlLabel
+                            value="2XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="2X-Large"
+                          />
+                          <FormControlLabel
+                            value="3XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="3X-Large"
+                          />
+                        </div>
                       </RadioGroup>
                     </FormControl>
                   </Grid>

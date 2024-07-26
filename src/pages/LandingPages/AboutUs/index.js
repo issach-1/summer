@@ -138,6 +138,7 @@ function FormSimple() {
                   year_joined: YearJoined,
                   email: Email,
                   image: UImageURL,
+                  user_id: userId
                 })
                   .then(() => {
                     window.alert(FullName + " was successfully registered as an ARMY");

@@ -82,7 +82,6 @@ function SignInBasic() {
   const [YearJoined, setYearJoined] = useState("");
   const [Email, setEmail] = useState("");
   const [UImageURL, setUImageURL] = useState("");
-  const [userId, setUid] = useState("");
   var arr = [
     FullName,
     EducationalStatus,
@@ -113,7 +112,7 @@ function SignInBasic() {
       // setAge(age);
       if (UploadImg) {
         const imageRef = ref(storage, `user_imgs/${UploadImg.fileName + v4()}`);
-        setUid(FullName.split(" ")[0] + PhoneNum);
+        let userId = FullName.split(" ")[0] + PhoneNum;
         uploadBytes(imageRef, UploadImg)
           .then(() => {
             getDownloadURL(imageRef)
@@ -122,7 +121,6 @@ function SignInBasic() {
               })
               .then(() => {
                 setDoc(doc(db, "users", userId), {
-                  user_id: userId,
                   age: Age,
                   name: FullName,
                   educational_status: EducationalStatus,

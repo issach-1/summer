@@ -27,7 +27,7 @@ function ContactUs() {
   //   toggleModaldel
   // };
   const handeltouchedit = () => {
-    window.alert("edit");
+    window.alert("edit is out of function for the time being");
   };
 
   const [delName, setDelname] = useState("");
@@ -214,15 +214,12 @@ function ContactUs() {
           users.push({ ...doc.data() });
         });
         setR([...users]);
-        console.log(users);
-        console.log("data : ", rows);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
   return (
-    <>
       <BaseLayout
         title="Registered members"
         breadcrumb={[
@@ -318,7 +315,6 @@ function ContactUs() {
                   className="margin_bottom"
                   onChange={(e) => {
                     setDelname(e.target.value);
-                    console.log(delName);
                   }}
                 />
 
@@ -328,8 +324,7 @@ function ContactUs() {
                   fontWeight="regular"
                   className="margin_top_l"
                 >
-                  Enter the name and the phone number of the person you want to delete in the
-                  following formate &quot;Firstname_middelname_lastname0912345678&quot;
+                  Use the formate &quot;Firstname_Phonenumber&quot;
                 </MKAlert>
               </MKBox>
               <MKBox display="flex" justifyContent="space-between" p={1.5}>
@@ -358,7 +353,6 @@ function ContactUs() {
           </Slide>
         </Modal>
       </BaseLayout>
-    </>
   );
 }
 

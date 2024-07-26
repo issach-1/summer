@@ -33,6 +33,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase.js";
 import { v4 } from "uuid";
+import logo from "../../assets/logo/aLogo.png";
 
 function SignInBasic() {
   const [password, setPassword] = useState("");
@@ -50,6 +51,21 @@ function SignInBasic() {
   const [Month_v, setMonth] = useState();
   const [Day_v, setDay] = useState();
   const [Year_v, setYear] = useState();
+
+
+  // const [checkedValues, setChecked] = useState([]);
+
+  // const handleCheckBox = (event) => {
+  //   const { value, checked } = event.target
+  //   setChecked((prev) => {
+  //     if(checked) {
+  //       return [...prev, value];
+  //     } else {
+  //       return prev.filter((item) => item !== value)
+  //     }
+  //   })
+  // }
+
 
   const [Age, setAge] = useState("");
   const [FullName, setFullName] = useState("");
@@ -84,30 +100,17 @@ function SignInBasic() {
   ];
 
   const handelClick = () => {
-    console.log("FullName : ", FullName);
-    console.log("EducationalStatus : ", EducationalStatus);
-    console.log("FoundationLevel : ", FoundationLevel);
-    console.log("cloth : ", cloth);
-    console.log("size : ", size);
-    console.log("payed : ", payed);
-    console.log("BirthDate : ", BirthDate);
-    console.log("SchoolName : ", SchoolName);
-    console.log("SchoolAddress : ", SchoolAddress);
-    console.log("ResidentialAddress : ", ResidentialAddress);
-    console.log("PhoneNum : ", PhoneNum);
-    console.log("YearJoined : ", YearJoined);
-    console.log("Email : ", Email);
 
     if (arr.indexOf("") == -1) {
-      var year = Year_v;
-      var month = Month_v;
-      var day = Day_v;
-      var today = new Date();
-      var age = today.getFullYear() - year;
-      if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
-        age--;
-      }
-      setAge(age);
+      // var year = Year_v;
+      // var month = Month_v;
+      // var day = Day_v;
+      // var today = new Date();
+      // var age = today.getFullYear() - year;
+      // if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
+      //   age--;
+      // }
+      // setAge(age);
       if (UploadImg) {
         const imageRef = ref(storage, `user_imgs/${UploadImg.fileName + v4()}`);
         setUid(FullName.split(" ")[0] + PhoneNum);
@@ -118,7 +121,6 @@ function SignInBasic() {
                 setUImageURL(Url);
               })
               .then(() => {
-                console.log(UImageURL);
                 setDoc(doc(db, "users", userId), {
                   user_id: userId,
                   age: Age,
@@ -164,7 +166,7 @@ function SignInBasic() {
         <BaseLayout
           title="Register new members"
           breadcrumb={[
-            { label: "Registered members", route: "/Admin/Registered_Members" },
+            { label: "Registered members", route: "/Registered_Members" },
             { label: "Add members" },
           ]}
         >
@@ -186,13 +188,12 @@ function SignInBasic() {
                       if (files) {
                         setImage(URL.createObjectURL(files[0]));
                         setUploadImg(files[0]);
-
-                        console.log("url", URL.createObjectURL(files[0]));
-                        console.log(files[0]);
+  
+                        
                       }
                     }}
                   />
-
+  
                   {image ? (
                     <img src={image} className="img_new" />
                   ) : (
@@ -221,7 +222,7 @@ function SignInBasic() {
                           }}
                         />
                       </Grid>
-
+  
                       <Grid item xs={12}>
                         <FormControl>
                           <FormLabel color="info" id="edu_radio">
@@ -294,9 +295,9 @@ function SignInBasic() {
                           </RadioGroup>
                         </FormControl>
                       </Grid>
-
+  
                       <Grid item xs={12} md={6}>
-                        <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
+                        {/* <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
                           <DatePicker
                             fullWidth
                             slotProps={{ textField: { variant: "standard" } }}
@@ -310,7 +311,16 @@ function SignInBasic() {
                             }}
                             views={["month", "day", "year"]}
                           />
-                        </LocalizationProvider>
+                        </LocalizationProvider> */}
+                        <MKInput
+                          variant="standard"
+                          label="Age"
+                          type="number"
+                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          fullWidth
+                          required
+                          onChange={() => setAge(event.target.value)}
+                        />
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
@@ -378,6 +388,28 @@ function SignInBasic() {
                         />
                       </Grid>
                     </Grid>
+                    {/* <Grid item xs={12} alignItems="center" ml={-1}>
+                      <Switch checked={checked} onChange={handleChecked} />
+                      <MKTypography
+                        variant="button"
+                        fontWeight="regular"
+                        color="text"
+                        ml={-1}
+                        sx={{ cursor: "pointer", userSelect: "none" }}
+                        onClick={handleChecked}
+                      >
+                        &nbsp;&nbsp;I agree the&nbsp;
+                      </MKTypography>
+                      <MKTypography
+                        component="a"
+                        href="#"
+                        variant="button"
+                        fontWeight="regular"
+                        color="dark"
+                      >
+                        Terms and Conditions
+                      </MKTypography>
+                    </Grid> */}
                     <Grid className="mar_both" item xs={12}>
                       <FormControl>
                         <FormLabel color="info" id="cloth_radio">
@@ -402,6 +434,12 @@ function SignInBasic() {
                             control={<Radio size="large" />}
                             label="Crew-neck"
                           />
+                          <FormControlLabel
+                            value="Both"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Both"
+                          />
                         </RadioGroup>
                       </FormControl>
                     </Grid>
@@ -415,8 +453,10 @@ function SignInBasic() {
                           row
                           aria-labelledby="size_radio"
                           name="size_radio"
+                          className="flex_obligate"
                           onChange={() => setSize(event.target.value)}
-                        >
+                        > 
+                        <div>
                           <FormControlLabel
                             value="S"
                             color="info"
@@ -427,14 +467,35 @@ function SignInBasic() {
                             value="M"
                             color="info"
                             control={<Radio size="large" />}
-                            label="medium"
+                            label="Medium"
                           />
                           <FormControlLabel
                             value="L"
                             color="info"
                             control={<Radio size="large" />}
-                            label="large"
+                            label="Large"
+                          />                    
+                        </div>
+                        <div>
+                          <FormControlLabel
+                            value="XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="X-Large"
                           />
+                          <FormControlLabel
+                            value="2XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="2X-Large"
+                          />
+                          <FormControlLabel
+                            value="3XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="3X-Large"
+                          />                    
+                        </div>
                         </RadioGroup>
                       </FormControl>
                     </Grid>
@@ -507,9 +568,12 @@ function SignInBasic() {
           }}
         />
         <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
-          <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+          <Grid  className="card_cont" container spacing={1} justifyContent="center" alignItems="center" height="100%">
+            <MKTypography className="font-2" variant="h1" color="white" opacity={1} mt={1} mb={0}>
+              <b className="gradtxt">A Good Soldier Of Jesus Christ</b>
+            </MKTypography>
             <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
-              <Card>
+              <Card className="ptop">
                 <MKBox
                   variant="gradient"
                   bgColor="dark"
@@ -520,10 +584,9 @@ function SignInBasic() {
                   p={2}
                   mb={1}
                   textAlign="center"
+                  className="head_img_cont"
                 >
-                  <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                    Sign in
-                  </MKTypography>
+                  <img src={logo} className="head_img" />
                 </MKBox>
                 <MKBox pt={4} pb={3} px={3}>
                   <MKBox component="form" role="form">
@@ -534,7 +597,6 @@ function SignInBasic() {
                           id="password"
                           onChange={(e) => {
                             setPassword(e.target.value);
-                            console.log(password);
                           }}
                           type={showPassword ? "text" : "password"}
                           endAdornment={
@@ -559,7 +621,7 @@ function SignInBasic() {
                         color="dark"
                         onClick={() => {
                           if (password == "ARMY@1234#Admin") {
-                            setAuth(true)
+                            setAuth(true);
                           }
                         }}
                         fullWidth

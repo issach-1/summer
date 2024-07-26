@@ -55,6 +55,21 @@ function FormSimple() {
   const [Day_v, setDay] = useState();
   const [Year_v, setYear] = useState();
 
+
+  // const [checkedValues, setChecked] = useState([]);
+
+  // const handleCheckBox = (event) => {
+  //   const { value, checked } = event.target
+  //   setChecked((prev) => {
+  //     if(checked) {
+  //       return [...prev, value];
+  //     } else {
+  //       return prev.filter((item) => item !== value)
+  //     }
+  //   })
+  // }
+
+
   const [Age, setAge] = useState("");
   const [FullName, setFullName] = useState("");
   const [EducationalStatus, setEducationalStatus] = useState("");
@@ -78,7 +93,7 @@ function FormSimple() {
     cloth,
     size,
     payed,
-    BirthDate,
+    Age,
     SchoolName,
     SchoolAddress,
     ResidentialAddress,
@@ -88,30 +103,16 @@ function FormSimple() {
   ];
 
   const handelClick = () => {
-    console.log("FullName : ", FullName);
-    console.log("EducationalStatus : ", EducationalStatus);
-    console.log("FoundationLevel : ", FoundationLevel);
-    console.log("cloth : ", cloth);
-    console.log("size : ", size);
-    console.log("payed : ", payed);
-    console.log("BirthDate : ", BirthDate);
-    console.log("SchoolName : ", SchoolName);
-    console.log("SchoolAddress : ", SchoolAddress);
-    console.log("ResidentialAddress : ", ResidentialAddress);
-    console.log("PhoneNum : ", PhoneNum);
-    console.log("YearJoined : ", YearJoined);
-    console.log("Email : ", Email);
-
     if (arr.indexOf("") == -1) {
-      var year = Year_v;
-      var month = Month_v;
-      var day = Day_v;
-      var today = new Date();
-      var age = today.getFullYear() - year;
-      if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
-        age--;
-      }
-      setAge(age);
+      // var year = Year_v;
+      // var month = Month_v;
+      // var day = Day_v;
+      // var today = new Date();
+      // var age = today.getFullYear() - year;
+      // if (today.getMonth() < month || (today.getMonth() == month && today.getDate() < day)) {
+      //   age--;
+      // }
+      // setAge(age);
       if (UploadImg) {
         const imageRef = ref(storage, `user_imgs/${UploadImg.fileName + v4()}`);
         setUid(FullName.split(" ")[0] + PhoneNum);
@@ -122,7 +123,6 @@ function FormSimple() {
                 setUImageURL(Url);
               })
               .then(() => {
-                console.log(UImageURL);
                 setDoc(doc(db, "users", userId), {
                   user_id: userId,
                   age: Age,
@@ -167,7 +167,7 @@ function FormSimple() {
       <BaseLayout
         title="Register new members"
         breadcrumb={[
-          { label: "Registered members", route: "/Admin/Registered_Members" },
+          { label: "Registered members", route: "/Registered_Members" },
           { label: "Add members" },
         ]}
       >
@@ -190,8 +190,7 @@ function FormSimple() {
                       setImage(URL.createObjectURL(files[0]));
                       setUploadImg(files[0]);
 
-                      console.log("url", URL.createObjectURL(files[0]));
-                      console.log(files[0]);
+                     
                     }
                   }}
                 />
@@ -299,7 +298,7 @@ function FormSimple() {
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                      <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
+                      {/* <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
                         <DatePicker
                           fullWidth
                           slotProps={{ textField: { variant: "standard" } }}
@@ -313,7 +312,16 @@ function FormSimple() {
                           }}
                           views={["month", "day", "year"]}
                         />
-                      </LocalizationProvider>
+                      </LocalizationProvider> */}
+                      <MKInput
+                        variant="standard"
+                        label="Age"
+                        type="number"
+                        inputProps={{ style: { textTransform: "capitalize" } }}
+                        fullWidth
+                        required
+                        onChange={() => setAge(event.target.value)}
+                      />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
@@ -427,6 +435,12 @@ function FormSimple() {
                           control={<Radio size="large" />}
                           label="Crew-neck"
                         />
+                        <FormControlLabel
+                          value="Both"
+                          color="info"
+                          control={<Radio size="large" />}
+                          label="Both"
+                        />
                       </RadioGroup>
                     </FormControl>
                   </Grid>
@@ -440,8 +454,10 @@ function FormSimple() {
                         row
                         aria-labelledby="size_radio"
                         name="size_radio"
+                        className="flex_obligate"
                         onChange={() => setSize(event.target.value)}
-                      >
+                      > 
+                      <div>
                         <FormControlLabel
                           value="S"
                           color="info"
@@ -452,14 +468,35 @@ function FormSimple() {
                           value="M"
                           color="info"
                           control={<Radio size="large" />}
-                          label="medium"
+                          label="Medium"
                         />
                         <FormControlLabel
                           value="L"
                           color="info"
                           control={<Radio size="large" />}
-                          label="large"
+                          label="Large"
+                        />                    
+                      </div>
+                      <div>
+                        <FormControlLabel
+                          value="XL"
+                          color="info"
+                          control={<Radio size="large" />}
+                          label="X-Large"
                         />
+                        <FormControlLabel
+                          value="2XL"
+                          color="info"
+                          control={<Radio size="large" />}
+                          label="2X-Large"
+                        />
+                        <FormControlLabel
+                          value="3XL"
+                          color="info"
+                          control={<Radio size="large" />}
+                          label="3X-Large"
+                        />                    
+                      </div>
                       </RadioGroup>
                     </FormControl>
                   </Grid>

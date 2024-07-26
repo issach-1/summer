@@ -42,7 +42,7 @@ const routes = [
   },
   {
     name: "Registered Members",
-    route: "/Admin/Registered_Members",
+    route: "/Registered_Members",
     icon: <ViewDayIcon />,
     component: <ContactUs />,
   },

@@ -43,3 +43,9 @@
     margin-top: 20px !important;
     margin-bottom: 10px !important;
 }
+.flex_obligate{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    column-gap: 15px;
+}

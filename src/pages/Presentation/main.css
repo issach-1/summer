@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
 .upload {
     width: 225px;
     height: 150px;
@@ -43,4 +44,50 @@
 .mar_both{
     margin-top: 20px !important;
     margin-bottom: 10px !important;
+}
+.head_img{
+    width: 290px;
+    height: auto;
+}
+.head_img_cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px !important;
+    margin-top: 0px !important;
+}
+.ptop{
+    padding-top: 16px !important;
+}
+.sign_in_pad{
+    position: absolute;
+    top: 6vh;
+}
+.font-2{
+  font-family: "Special Elite", system-ui !important;
+  font-size: 4vw !important;
+  width: 80vw !important;
+  text-align: center;
+  margin: 0px !important;
+}
+.gradtxt{
+  background-image: url("../../assets/images/illustrations/bg.jpg") !important;
+  background-position: left;
+  background-size: contain;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: 4px;
+}
+.card_cont{
+    height: 100vh !important;
+    position: absolute !important;
+    top: 0px !important;
+    left: 0px !important;
+    padding-top: 6vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
 }

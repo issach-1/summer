@@ -1,0 +1,11 @@
+export default [
+    {
+        ignores: [
+            "build/**/*",        // ignore all contents in and under `build/` directory but not the `build/` directory itself
+            "!build/**/*/",      // unignore all subdirectories
+            "!build/**/test.js", // unignore `test.js` files
+            "src/",
+            "*.log",
+        ]
+    }
+];

@@ -4,9 +4,8 @@
 import PropTypes from "prop-types";
 
 // @mui material components
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
+import React from "react"
 
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -20,7 +19,6 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
 function CenteredFooter({ company, links, socials, light }) {
-  const { href, name } = company;
 
   const year = new Date().getFullYear();
 

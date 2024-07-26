@@ -12,7 +12,6 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import SimpleFooter from "examples/Footers/SimpleFooter";
 
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
@@ -40,7 +39,7 @@ function SignInBasic() {
   const [auth, setAuth] = useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 

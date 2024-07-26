@@ -90,7 +90,7 @@ function SignInBasic() {
     cloth,
     size,
     payed,
-    BirthDate,
+    Age,
     SchoolName,
     SchoolAddress,
     ResidentialAddress,

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+.z-index{
+    z-index: 3;
+}
+.card{
+    width: 320px;
+    height: 340px !important;
+    border-radius: 12px !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #6d8f02;
+}
+.card-2{
+    width: 320px;
+    height: 340px !important;
+    border-radius: 12px !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #bb3625;
+}
+.card-3{
+    width: 320px;
+    height: 340px !important;
+    border-radius: 12px !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #c59418;
+}
+.card-img{
+    width: 100%;
+    height: 75%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 15%;
+    background-color: black;
+}
+.card-text{
+    font-family: "Almendra", serif !important;
+    background-color: transparent;
+    width: 100%;
+    height: 30%;
+    padding-left: 20px;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.pad{
+    padding: 0px !important;
+    margin: 15px !important;
+}

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
+
+.z-index{
+    z-index: 3;
+}
+.info-cont{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.info-header{
+    font-family: "Special Elite", system-ui !important;
+    font-size: 30px !important;
+    color: #7ca300;
+    font-weight: 700;
+}
+.info-title{
+    font-family: "Roboto Slab", sans-serif !important;
+    color: rgb(6, 0, 37);
+    font-weight: 700;
+    font-size: 32px;
+}
+.info-body{
+    color: rgb(88, 88, 88);
+}
+.mar{
+    margin-bottom: 0px !important;
+}
+.container_info{
+    min-width: 90vw !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}

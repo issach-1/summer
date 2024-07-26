@@ -1,0 +1,46 @@
+.upload {
+    width: 225px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #0c467c;
+    cursor: pointer;
+    border-radius: 7px;
+}
+.upload_new {
+    width: 225px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 7px;
+}
+.img_n{
+    width: 60px;
+    height: 60px;
+    border-radius: 0px !important;
+}
+.img_new{
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 7px;
+    object-fit: cover;
+}
+.txt{
+    font-size: 11 !important;
+}
+.inp_txt{
+    text-transform: capitalize;
+}
+.txt{
+    font-size: 11px !important;
+}
+
+.mar_both{
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+}

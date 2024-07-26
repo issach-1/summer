@@ -12,5 +12,9 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
+  "rules": {
+    "no-console": "warn",
+    "react/prop-types": "off"
+  },
   "settings": { "import/resolver": { "node": { "paths": ["public"] } } }
 }

@@ -73,7 +73,8 @@ function FormSimple() {
   const [EducationalStatus, setEducationalStatus] = useState("");
   const [FoundationLevel, setFoundationLevel] = useState("");
   const [cloth, setCloth] = useState("");
-  const [size, setSize] = useState("");
+  const [Tsize, setTSize] = useState("");
+  const [Csize, setCSize] = useState("");
   const [payed, setPayed] = useState("");
   const [BirthDate, setBirthDate] = useState("");
   const [SchoolName, setSchoolName] = useState("");
@@ -82,13 +83,15 @@ function FormSimple() {
   const [PhoneNum, setPhoneNum] = useState("");
   const [YearJoined, setYearJoined] = useState("");
   const [Email, setEmail] = useState("");
+  const [Ambition, setAmbition] = useState("");
   const [UImageURL, setUImageURL] = useState("");
   var arr = [
     FullName,
     EducationalStatus,
     FoundationLevel,
     cloth,
-    size,
+    Tsize,
+    Csize,
     payed,
     Age,
     SchoolName,
@@ -97,6 +100,7 @@ function FormSimple() {
     PhoneNum,
     YearJoined,
     Email,
+    Ambition
   ];
 
   const handelClick = () => {
@@ -111,50 +115,38 @@ function FormSimple() {
       // }
       // setAge(age);
       if (UploadImg) {
-        const imageRef = ref(storage, `user_imgs/${UploadImg.fileName + v4()}`);
-        let userId = FullName.split(" ")[0] + PhoneNum;
-        uploadBytes(imageRef, UploadImg)
-          .then(() => {
-            getDownloadURL(imageRef)
-              .then((Url) => {
-                setUImageURL(Url);
-              })
-              .then(() => {
-                if (UImageURL == !"") {
-                  setDoc(doc(db, "users", userId), {
-                    age: Age,
-                    name: FullName,
-                    educational_status: EducationalStatus,
-                    foundation_level: FoundationLevel,
-                    cloth: cloth,
-                    size: size,
-                    payed: payed,
-                    birth_date: BirthDate,
-                    school_name: SchoolName,
-                    school_address: SchoolAddress,
-                    residential_address: ResidentialAddress,
-                    phone_number: PhoneNum,
-                    year_joined: YearJoined,
-                    email: Email,
-                    image: UImageURL,
-                    user_id: userId,
-                  })
-                    .then(() => {
-                      window.alert(FullName + " was successfully registered as an ARMY");
-                    })
-                    .catch((err) => {
-                      window.alert("Failed to register user, check console for more information");
-                      console.log(err.message);
-                    });
-                } else {
-                  window.alert ("Please click the button again")
-                }
-              });
+        if (UImageURL) {
+          console.log("url: ", UImageURL);
+          let userId = FullName.split(" ")[0] + PhoneNum;
+          setDoc(doc(db, "users", userId), {
+            age: Age,
+            name: FullName,
+            educational_status: EducationalStatus,
+            foundation_level: FoundationLevel,
+            cloth: cloth,
+            t_size: Tsize,
+            c_size: Csize,
+            payed: payed,
+            birth_date: BirthDate,
+            school_name: SchoolName,
+            school_address: SchoolAddress,
+            residential_address: ResidentialAddress,
+            phone_number: PhoneNum,
+            year_joined: YearJoined,
+            email: Email,
+            image: UImageURL,
+            user_id: userId,
+            ambition: Ambition,
+
           })
-          .catch((err) => {
-            window.alert("Failed to post, check console for more information");
-            console.log(err.message);
-          });
+            .then(() => {
+              window.alert(FullName + " was successfully registered as an ARMY");
+            })
+            .catch((err) => {
+              window.alert("Failed to register user, check console for more information");
+              console.log(err.message);
+            });
+        }
       } else {
         window.alert("Please upload an image");
       }
@@ -190,6 +182,18 @@ function FormSimple() {
                     if (files) {
                       setImage(URL.createObjectURL(files[0]));
                       setUploadImg(files[0]);
+                      const imageRef = ref(storage, `user_imgs/${files[0].fileName + v4()}`);
+                      uploadBytes(imageRef, files[0])
+                        .then(() => {
+                          getDownloadURL(imageRef).then((Url) => {
+                            setUImageURL(Url);
+                            console.log(Url)
+                          });
+                        })
+                        .catch((err) => {
+                          window.alert("Failed to post, check console for more information");
+                          console.log(err.message);
+                        });
                     }
                   }}
                 />
@@ -291,6 +295,12 @@ function FormSimple() {
                             color="info"
                             control={<Radio size="large" />}
                             label="Completed 2"
+                          />
+                          <FormControlLabel
+                            value="Not started / New"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Not started / New"
                           />
                         </RadioGroup>
                       </FormControl>
@@ -446,7 +456,7 @@ function FormSimple() {
                   <Grid className="mar_both" item xs={12}>
                     <FormControl>
                       <FormLabel color="info" id="size_radio">
-                        Ordered Clothing Size
+                        Crew neck Size
                       </FormLabel>
                       <RadioGroup
                         required
@@ -454,7 +464,7 @@ function FormSimple() {
                         aria-labelledby="size_radio"
                         name="size_radio"
                         className="flex_obligate"
-                        onChange={() => setSize(event.target.value)}
+                        onChange={() => setCSize(event.target.value)}
                       >
                         <div>
                           <FormControlLabel
@@ -475,14 +485,14 @@ function FormSimple() {
                             control={<Radio size="large" />}
                             label="Large"
                           />
-                        </div>
-                        <div>
                           <FormControlLabel
                             value="XL"
                             color="info"
                             control={<Radio size="large" />}
                             label="X-Large"
                           />
+                        </div>
+                        <div>
                           <FormControlLabel
                             value="2XL"
                             color="info"
@@ -494,6 +504,74 @@ function FormSimple() {
                             color="info"
                             control={<Radio size="large" />}
                             label="3X-Large"
+                          />
+                          <FormControlLabel
+                            value="N/A"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Not-ordered"
+                          />
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                  </Grid>
+                  <Grid className="mar_both" item xs={12}>
+                    <FormControl>
+                      <FormLabel color="info" id="size_radio">
+                        T-shit Size
+                      </FormLabel>
+                      <RadioGroup
+                        required
+                        row
+                        aria-labelledby="size_radio"
+                        name="size_radio"
+                        className="flex_obligate"
+                        onChange={() => setTSize(event.target.value)}
+                      >
+                        <div>
+                          <FormControlLabel
+                            value="S"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Small"
+                          />
+                          <FormControlLabel
+                            value="M"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Medium"
+                          />
+                          <FormControlLabel
+                            value="L"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Large"
+                          />
+                          <FormControlLabel
+                            value="XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="X-Large"
+                          />
+                        </div>
+                        <div>
+                          <FormControlLabel
+                            value="2XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="2X-Large"
+                          />
+                          <FormControlLabel
+                            value="3XL"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="3X-Large"
+                          />
+                          <FormControlLabel
+                            value="N/A"
+                            color="info"
+                            control={<Radio size="large" />}
+                            label="Not-ordered"
                           />
                         </div>
                       </RadioGroup>
@@ -526,6 +604,17 @@ function FormSimple() {
                       </RadioGroup>
                     </FormControl>
                   </Grid>
+                  <Grid item xs={12}>
+                      <MKInput
+                        variant="standard"
+                        label="Your Ambition"
+                        multiline
+                        fullWidth
+                        required
+                        rows={6}
+                        onChange={() => setAmbition(event.target.value)}
+                      />
+                    </Grid>
                   <Grid container item justifyContent="center" xs={12} my={2}>
                     <MKButton
                       variant="gradient"

@@ -117,7 +117,7 @@ function SignInBasic() {
           let userId = FullName.split(" ")[0] + PhoneNum;
           setDoc(doc(db, "users", userId), {
             age: Age,
-            name: FullName,
+            name: FullName.toLowerCase(),
             educational_status: EducationalStatus,
             foundation_level: FoundationLevel,
             cloth: cloth,

@@ -117,7 +117,7 @@ function FormSimple() {
       if (UploadImg) {
         if (UImageURL) {
           console.log("url: ", UImageURL);
-          let userId = FullName.split(" ")[0] + PhoneNum;
+          let userId = FullName.split(" ")[0].join("_") + PhoneNum;
           setDoc(doc(db, "users", userId), {
             age: Age,
             name: FullName.toLowerCase(),

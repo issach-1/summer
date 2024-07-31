@@ -18,7 +18,7 @@ function ContactUs() {
   const columns6 = [
     {
       headerName: "Num",
-      valueGetter: "node.rowIndex + 1"
+      valueGetter: "node.rowIndex + 1",
       width: 45,
     },
     {

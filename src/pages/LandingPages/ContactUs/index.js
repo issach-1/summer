@@ -17,8 +17,13 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 function ContactUs() {
   const columns6 = [
     {
+      headerName: "Num",
+      valueGetter: "node.rowIndex + 1"
+      width: 45,
+    },
+    {
       field: "image",
-      width: 55,
+      width: 100,
       headerName: "",
       checkboxSelection: true,
       filter: false,

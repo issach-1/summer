@@ -23,7 +23,8 @@ function ContactUs() {
     },
     {
       field: "image",
-      width: 100,
+      minWidth: 130,
+      width: 130,
       headerName: "",
       checkboxSelection: true,
       filter: false,
@@ -88,6 +89,55 @@ function ContactUs() {
       editable: false,
       filter: "agTextColumnFilter",
     },
+    {
+      field: "foundation_level",
+      minWidth: 150,
+      headerName: "Foundation Level",
+      width: 200,
+      editable: false,
+      filter: "agTextColumnFilter",
+    },
+    {
+      field: "year_joined",
+      minWidth: 100,
+      headerName: "Year joined (to GLC)",
+      width: 150,
+      editable: false,
+      filter: "agTextColumnFilter",
+    },  
+    {
+      field: "educational_status",
+      minWidth: 100,
+      headerName: "Educational Status",
+      width: 150,
+      editable: false,
+      filter: "agTextColumnFilter",
+    }, 
+        {
+      field: "residential_address",
+      minWidth: 150,
+      headerName: "Residential Address",
+      width: 200,
+      editable: false,
+      filter: "agTextColumnFilter",
+    },
+        {
+      field: "school_name",
+      minWidth: 150,
+      headerName: "School Name",
+      width: 200,
+      editable: false,
+      filter: "agTextColumnFilter",
+    }, 
+         {
+      field: "school_address",
+      minWidth: 150,
+      headerName: "School Address",
+      width: 200,
+      editable: false,
+      filter: "agTextColumnFilter",
+    },
+    
   ];
 
   const onRowSelected = useCallback(

@@ -714,7 +714,7 @@ function SignInBasic() {
                         variant="gradient"
                         color="dark"
                         onClick={() => {
-                          if (password == "ARMY@1234#Admin") {
+                          if (password == "Admin@1234#ARMY") {
                             setAuth(true);
                           }
                         }}

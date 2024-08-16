@@ -19,7 +19,7 @@ function ContactUs() {
     {
       headerName: "Num",
       valueGetter: "node.rowIndex + 1",
-      width: 45,
+      width: 70,
     },
     {
       field: "image",

@@ -216,7 +216,7 @@ function ContactUs() {
             setR([...users]);
           })
           .catch((error) => {
-            console.error("Error getting document:", error);
+            console.error("Error getting documents :", error);
           });
       })
       .catch((err) => {

@@ -248,11 +248,69 @@ function ContactUs() {
       const docSnap = await getDocs(docRef);
 
       if (docSnap.exists()) {
-        await updateDoc(docRef), {
-          `${Field}`: chn, //field which you have to update
-        };
+        if (field == "name") {
+            await updateDoc(docRef),
+              {
+                name: newValue, //field which you have to update
+              };
+          } else if (field == "payed") {
+            await updateDoc(docRef),
+              {
+                payed: newValue, //field which you have to update
+              };
+          } else if (field == "phone_number") {
+            await updateDoc(docRef),
+              {
+                phone_number: newValue, //field which you have to update
+              };
+          } else if (field == "residential_address") {
+            await updateDoc(docRef),
+              {
+                residential_address: newValue, //field which you have to update
+              };
+          } else if (field == "cloth") {
+            await updateDoc(docRef),
+              {
+                cloth: newValue, //field which you have to update
+              };
+          } else if (field == "educational_status") {
+            await updateDoc(docRef),
+              {
+                educational_status: newValue, //field which you have to update
+              };
+          } else if (field == "foundation_level") {
+            await updateDoc(docRef),
+              {
+                foundation_level: newValue, //field which you have to update
+              };
+          } else if (field == "school_address") {
+            await updateDoc(docRef),
+              {
+                school_address: newValue, //field which you have to update
+              };
+          } else if (field == "t_size") {
+            await updateDoc(docRef),
+              {
+                t_size: newValue, //field which you have to update
+              };
+          } else if (field == "c_size") {
+            await updateDoc(docRef),
+              {
+                c_size: newValue, //field which you have to update
+              };
+          } else if (field == "age") {
+            await updateDoc(docRef),
+              {
+                age: newValue, //field which you have to update
+              };
+          } else if (field == "school_name") {
+            await updateDoc(docRef),
+              {
+                school_name: newValue, //field which you have to update
+              };
+          }
         alert(
-          `Document ${user_id} successfully updated! Field: ${field}, New Value: ${chn}`
+          `Document successfully updated! Field: ${field}, New Value: ${chn}`
         );
       } else {
         alert("No such document!");

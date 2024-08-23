@@ -243,6 +243,7 @@ function ContactUs() {
     const newValue = event.newValue ; // Get the new value
     setchn(newValue)
     console.log(field, newValue, user_id);
+    console.log(typeof field, typeof newValue, typeof user_id)
     try {
       const docRef = doc(db, "users", user_id);
 

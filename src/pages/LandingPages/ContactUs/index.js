@@ -8,7 +8,7 @@ import {
   getDocs,
   doc,
   deleteDoc,
-  updateDoc,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../../../firebase.js";
 import "./style.css";
@@ -246,76 +246,58 @@ function ContactUs() {
     try {
       const docRef = doc(db, "users", user_id);
 
-      getDocs(docRef)
-        .then((doc) => {
-          if (field == "name") {
-            updateDoc(doc),
-              {
-                name: newValue, //field which you have to update
-              };
-          } else if (field == "payed") {
-            updateDoc(doc),
-              {
-                payed: newValue, //field which you have to update
-              };
-          } else if (field == "phone_number") {
-            updateDoc(doc),
-              {
-                phone_number: newValue, //field which you have to update
-              };
-          } else if (field == "residential_address") {
-            updateDoc(doc),
-              {
-                residential_address: newValue, //field which you have to update
-              };
-          } else if (field == "cloth") {
-            updateDoc(doc),
-              {
-                cloth: newValue, //field which you have to update
-              };
-          } else if (field == "educational_status") {
-            updateDoc(doc),
-              {
-                educational_status: newValue, //field which you have to update
-              };
-          } else if (field == "foundation_level") {
-            updateDoc(doc),
-              {
-                foundation_level: newValue, //field which you have to update
-              };
-          } else if (field == "school_address") {
-            updateDoc(doc),
-              {
-                school_address: newValue, //field which you have to update
-              };
-          } else if (field == "t_size") {
-            updateDoc(doc),
-              {
-                t_size: newValue, //field which you have to update
-              };
-          } else if (field == "c_size") {
-            updateDoc(doc),
-              {
-                c_size: newValue, //field which you have to update
-              };
-          } else if (field == "age") {
-            updateDoc(doc),
-              {
-                age: newValue, //field which you have to update
-              };
-          } else if (field == "school_name") {
-            updateDoc(doc),
-              {
-                school_name: newValue, //field which you have to update
-              };
-          }
-          alert(
-            `Document successfully updated! Field: ${field}, New Value: ${newValue}`
-          );
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+      if (field == "name") {
+        setDoc(docRef, {
+          name: newValue,
+        }, { merge: true });
+      } else if (field == "payed") {
+        setDoc(docRef, {
+          payed: newValue,
+        }, { merge: true });
+      } else if (field == "phone_number") {
+        setDoc(docRef, {
+          phone_number: newValue,
+        }, { merge: true });
+      } else if (field == "residential_address") {
+        setDoc(docRef, {
+          residential_address: newValue,
+        }, { merge: true });
+      } else if (field == "cloth") {
+        setDoc(docRef, {
+          cloth: newValue,
+        }, { merge: true });
+      } else if (field == "educational_status") {
+        setDoc(docRef, {
+          educational_status: newValue,
+        }, { merge: true });
+      } else if (field == "foundation_level") {
+        setDoc(docRef, {
+          foundation_level: newValue,
+        }, { merge: true });
+      } else if (field == "school_address") {
+        setDoc(docRef, {
+          school_address: newValue,
+        }, { merge: true });
+      } else if (field == "t_size") {
+        setDoc(docRef, {
+          t_size: newValue,
+        }, { merge: true });
+      } else if (field == "c_size") {
+        setDoc(docRef, {
+          c_size: newValue,
+        }, { merge: true });
+      } else if (field == "age") {
+        setDoc(docRef, {
+          age: newValue,
+        }, { merge: true });
+      } else if (field == "school_name") {
+        setDoc(docRef, {
+          school_name: newValue,
+        }, { merge: true });
+      }
+      alert(
+        `Document successfully updated! Field: ${field}, New Value: ${newValue}`
+      );
     } catch (error) {
       alert(
         `Field: ${field}, New Value: ${newValue} \n Error updating document: ${error}`

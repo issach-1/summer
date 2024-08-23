@@ -201,30 +201,8 @@ function ContactUs() {
     getDocs(colref)
       .then((snapshot) => {
         snapshot.docs
-          .forEach((documentSnapshot) => {
-            let createTime = documentSnapshot.createTime.toDate();
-            const monthNames = [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ];
-            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-            const dayOfWeek = dayNames[createTime.getDay()];
-            const month = monthNames[createTime.getMonth()];
-            const day = ("0" + createTime.getDate()).slice(-2);
-            const year = createTime.getFullYear();
-            const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-            users.push({ ...documentSnapshot.data(), time: formatedDate });
-            console.log({ ...documentSnapshot.data(), time: formatedDate });
+          .forEach((doc) => {
+            users.push({ ...doc.data() });
           })
           .then(() => {
             setR([...users]);
@@ -242,30 +220,8 @@ function ContactUs() {
     getDocs(colref)
       .then((snapshot) => {
         snapshot.docs
-          .forEach((documentSnapshot) => {
-            let createTime = documentSnapshot.createTime;
-            const monthNames = [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ];
-            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-            const dayOfWeek = dayNames[createTime.getDay()];
-            const month = monthNames[createTime.getMonth()];
-            const day = ("0" + createTime.getDate()).slice(-2);
-            const year = createTime.getFullYear();
-            const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-            users.push({ ...doc.data(), time: formatedDate });
-            console.log({ ...doc.data(), time: formatedDate });
+          .forEach((doc) => {
+            users.push({ ...doc.data() });
           })
           .then(() => {
             setR([...users]);

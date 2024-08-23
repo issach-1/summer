@@ -242,6 +242,7 @@ function ContactUs() {
     const field = event.colDef.field; // Get the field/column that was edited
     const newValue = event.newValue ; // Get the new value
     setchn(newValue)
+    console.log(field, newValue, user_id);
     try {
       const docRef = doc(db, "users", user_id);
 

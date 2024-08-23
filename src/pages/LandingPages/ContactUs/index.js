@@ -197,7 +197,7 @@ function ContactUs() {
     getDocs(colref)
       .then((snapshot) => {
         snapshot.docs.forEach(documentSnapshot, (doc) => {
-          let createTime = documentSnapshot.createTime;
+          let createTime = documentSnapshot.createTime.toDate();
           const monthNames = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -251,7 +251,8 @@ function ContactUs() {
       .catch((err) => {
         console.log(err.message);
       });
-  }
+  })
+}
   const gridRef = useRef();
   const onBtnExport = useCallback(() => {
     gridRef.current.api.exportDataAsCsv();

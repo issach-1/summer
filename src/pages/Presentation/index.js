@@ -81,8 +81,11 @@ function SignInBasic() {
   const [YearJoined, setYearJoined] = useState("");
   const [Email, setEmail] = useState("");
   const [Ambition, setAmbition] = useState("");
+
+  const [Time, setTime] = useState("");
   const [UImageURL, setUImageURL] = useState("");
   var arr = [
+    Time,
     FullName,
     EducationalStatus,
     FoundationLevel,
@@ -97,10 +100,40 @@ function SignInBasic() {
     PhoneNum,
     YearJoined,
     Email,
-    Ambition
+    Ambition,
   ];
 
   const handelClick = () => {
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    // Array of month names
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    // Get today's date
+    const today = new Date();
+
+    // Extract the day of the week, month, date, and year
+    const dayOfWeek = dayNames[today.getDay()];
+    const month = monthNames[today.getMonth()];
+    const day = ("0" + today.getDate()).slice(-2); // Add leading zero if necessary
+    const year = today.getFullYear();
+
+    // Format the date
+    const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+    setTime(formattedDate);
     if (arr.indexOf("") == -1) {
       // var year = Year_v;
       // var month = Month_v;
@@ -114,7 +147,7 @@ function SignInBasic() {
       if (UploadImg) {
         if (UImageURL) {
           console.log("url: ", UImageURL);
-          let userId = FullName.split(" ").join("_") + PhoneNum;     
+          let userId = FullName.split(" ").join("_") + PhoneNum;
           setDoc(doc(db, "users", userId), {
             age: Age,
             name: FullName.toLowerCase(),
@@ -134,13 +167,17 @@ function SignInBasic() {
             image: UImageURL,
             user_id: userId,
             ambition: Ambition,
-
+            time: Time,
           })
             .then(() => {
-              window.alert(FullName + " was successfully registered as an ARMY");
+              window.alert(
+                FullName + " was successfully registered as an ARMY"
+              );
             })
             .catch((err) => {
-              window.alert("Failed to register user, check console for more information");
+              window.alert(
+                "Failed to register user, check console for more information"
+              );
               console.log(err.message);
             });
         }
@@ -164,7 +201,12 @@ function SignInBasic() {
         >
           <MKBox component="section" py={12}>
             <Container>
-              <Grid container justifyContent="center" alignItems="center" flexDirection="column">
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+              >
                 <form
                   className={image ? "upload_new" : "upload"}
                   onClick={() => document.querySelector(".file_input").click()}
@@ -180,22 +222,27 @@ function SignInBasic() {
                       if (files) {
                         setImage(URL.createObjectURL(files[0]));
                         setUploadImg(files[0]);
-                        const imageRef = ref(storage, `user_imgs/${files[0].fileName + v4()}`);
+                        const imageRef = ref(
+                          storage,
+                          `user_imgs/${files[0].fileName + v4()}`
+                        );
                         uploadBytes(imageRef, files[0])
                           .then(() => {
                             getDownloadURL(imageRef).then((Url) => {
                               setUImageURL(Url);
-                              console.log(Url)
+                              console.log(Url);
                             });
                           })
                           .catch((err) => {
-                            window.alert("Failed to post, check console for more information");
+                            window.alert(
+                              "Failed to post, check console for more information"
+                            );
                             console.log(err.message);
                           });
                       }
                     }}
                   />
-  
+
                   {image ? (
                     <img src={image} className="img_new" />
                   ) : (
@@ -218,13 +265,15 @@ function SignInBasic() {
                           label="Full Name"
                           fullWidth
                           required
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           onChange={() => {
                             setFullName(event.target.value);
                           }}
                         />
                       </Grid>
-  
+
                       <Grid item xs={12}>
                         <FormControl>
                           <FormLabel color="info" id="edu_radio">
@@ -235,7 +284,9 @@ function SignInBasic() {
                             row
                             aria-labelledby="edu_radio"
                             name="edu_radio"
-                            onChange={() => setEducationalStatus(event.target.value)}
+                            onChange={() =>
+                              setEducationalStatus(event.target.value)
+                            }
                           >
                             <FormControlLabel
                               value="Highschool"
@@ -268,7 +319,9 @@ function SignInBasic() {
                             row
                             aria-labelledby="foundation_radio"
                             name="foundation_radio"
-                            onChange={() => setFoundationLevel(event.target.value)}
+                            onChange={() =>
+                              setFoundationLevel(event.target.value)
+                            }
                           >
                             <FormControlLabel
                               value="Learning 1"
@@ -303,7 +356,7 @@ function SignInBasic() {
                           </RadioGroup>
                         </FormControl>
                       </Grid>
-  
+
                       <Grid item xs={12} md={6}>
                         {/* <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
                           <DatePicker
@@ -324,14 +377,19 @@ function SignInBasic() {
                           variant="standard"
                           label="Age"
                           type="number"
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           fullWidth
                           required
                           onChange={() => setAge(event.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
+                        <LocalizationProvider
+                          fullWidth
+                          dateAdapter={AdapterDayjs}
+                        >
                           <DatePicker
                             fullWidth
                             slotProps={{ textField: { variant: "standard" } }}
@@ -348,7 +406,9 @@ function SignInBasic() {
                         <MKInput
                           variant="standard"
                           label="School Name"
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           fullWidth
                           required
                           onChange={() => setSchoolName(event.target.value)}
@@ -359,7 +419,9 @@ function SignInBasic() {
                           variant="standard"
                           label="School Address"
                           fullWidth
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           required
                           onChange={() => setSchoolAddress(event.target.value)}
                         />
@@ -369,9 +431,13 @@ function SignInBasic() {
                           variant="standard"
                           label="Residence Address"
                           fullWidth
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           required
-                          onChange={() => setResidentialAddress(event.target.value)}
+                          onChange={() =>
+                            setResidentialAddress(event.target.value)
+                          }
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -379,7 +445,9 @@ function SignInBasic() {
                           variant="standard"
                           defaultValue="09"
                           label="Phone Number"
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           fullWidth
                           onChange={() => setPhoneNum(event.target.value)}
                         />
@@ -390,7 +458,9 @@ function SignInBasic() {
                           type="email"
                           label="Email Address"
                           fullWidth
-                          inputProps={{ style: { textTransform: "capitalize" } }}
+                          inputProps={{
+                            style: { textTransform: "capitalize" },
+                          }}
                           required
                           onChange={() => setEmail(event.target.value)}
                         />
@@ -603,16 +673,16 @@ function SignInBasic() {
                       </FormControl>
                     </Grid>
                     <Grid item xs={12}>
-                        <MKInput
-                          variant="standard"
-                          label="Your Ambition"
-                          multiline
-                          fullWidth
-                          required
-                          rows={6}
-                          onChange={() => setAmbition(event.target.value)}
-                        />
-                      </Grid>
+                      <MKInput
+                        variant="standard"
+                        label="Your Ambition"
+                        multiline
+                        fullWidth
+                        required
+                        rows={6}
+                        onChange={() => setAmbition(event.target.value)}
+                      />
+                    </Grid>
                     <Grid container item justifyContent="center" xs={12} my={2}>
                       <MKButton
                         variant="gradient"
@@ -644,7 +714,10 @@ function SignInBasic() {
           width="100%"
           minHeight="100vh"
           sx={{
-            backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
+            backgroundImage: ({
+              functions: { linearGradient, rgba },
+              palette: { gradients },
+            }) =>
               `${linearGradient(
                 rgba(gradients.dark.main, 0.6),
                 rgba(gradients.dark.state, 0.6)
@@ -654,7 +727,14 @@ function SignInBasic() {
             backgroundRepeat: "no-repeat",
           }}
         />
-        <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
+        <MKBox
+          px={1}
+          width="100%"
+          height="100vh"
+          mx="auto"
+          position="relative"
+          zIndex={2}
+        >
           <Grid
             className="card_cont"
             container
@@ -663,7 +743,14 @@ function SignInBasic() {
             alignItems="center"
             height="100%"
           >
-            <MKTypography className="font-2" variant="h1" color="white" opacity={1} mt={1} mb={0}>
+            <MKTypography
+              className="font-2"
+              variant="h1"
+              color="white"
+              opacity={1}
+              mt={1}
+              mb={0}
+            >
               <b className="gradtxt">A Good Soldier Of Jesus Christ</b>
             </MKTypography>
             <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
@@ -701,7 +788,11 @@ function SignInBasic() {
                                 onMouseDown={handleMouseDownPassword}
                                 edge="end"
                               >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                {showPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
                               </IconButton>
                             </InputAdornment>
                           }

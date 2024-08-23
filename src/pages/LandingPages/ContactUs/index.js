@@ -218,7 +218,6 @@ function ContactUs() {
         }).catch((error) => {
           console.error("Error getting document:", error);
         });
-        });
         setR([...users]);
       })
       .catch((err) => {

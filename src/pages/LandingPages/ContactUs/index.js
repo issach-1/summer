@@ -203,8 +203,6 @@ function ContactUs() {
         snapshot.docs
           .forEach((doc) => {
             users.push({ ...doc.data() });
-          })
-          .then(() => {
             setR([...users]);
           })
           .catch((error) => {
@@ -222,10 +220,8 @@ function ContactUs() {
         snapshot.docs
           .forEach((doc) => {
             users.push({ ...doc.data() });
-          })
-          .then(() => {
             setR([...users]);
-          });
+          })
       })
       .catch((err) => {
         console.log(err.message);

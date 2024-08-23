@@ -3,7 +3,13 @@ import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import BaseLayout from "layouts/sections/components/BaseLayout";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../../firebase.js";
 import "./style.css";
 import alt_img from "../../../assets/icons/alt_img.png";
@@ -235,12 +241,15 @@ function ContactUs() {
     try {
       const docRef = doc(db, "users", id);
 
-      const docSnap = await getDoc(docRef);
+      const docSnap = await getDocs(docRef);
 
       if (docSnap.exists()) {
-        // Step 3: Use updateDoc to update specific fields in the document
-        await updateDoc(docRef, { [field]: newValue });
-        alert(`Document ${id} successfully updated! Field: ${field}, New Value: ${newValue}`);
+        await updateDoc(docRef), {
+          [field]: [newValue], //field which you have to update
+        };
+        alert(
+          `Document ${id} successfully updated! Field: ${field}, New Value: ${newValue}`
+        );
       } else {
         console.log("No such document!");
       }

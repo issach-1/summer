@@ -196,8 +196,8 @@ function ContactUs() {
 
     getDocs(colref)
       .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          const createTime = doc.createTime.toDate();
+        snapshot.docs.forEach(documentSnapshot, (doc) => {
+          let createTime = documentSnapshot.createTime;
           const monthNames = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -228,7 +228,23 @@ function ContactUs() {
     getDocs(colref)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          users.push({ ...doc.data() });
+           snapshot.docs.forEach(documentSnapshot, (doc) => {
+          let createTime = documentSnapshot.createTime;
+          const monthNames = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+          ];
+            const dayNames = [
+                "Sun", "Mon", "Tue", "Wed", 
+                "Thu", "Fri", "Sat"
+            ];
+          const dayOfWeek = dayNames[createTime.getDay()];
+          const month = monthNames[createTime.getMonth()];
+          const day = ("0" + createTime.getDate()).slice(-2);
+          const year = createTime.getFullYear();
+          const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+          users.push({ ...doc.data(), "time": formatedDate});
+          console.log({ ...doc.data(), "time": formatedDate})
         });
         setR([...users]);
       })

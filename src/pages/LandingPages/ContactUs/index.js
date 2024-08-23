@@ -163,7 +163,10 @@ function ContactUs() {
           const day = ("0" + createTime.getDate()).slice(-2);
           const year = createTime.getFullYear();
           setformattedDate(`${dayOfWeek}, ${month} ${day}, ${year}`);
-        };
+        }).catch((error) => {
+          console.error("Error getting document:", error);
+          cellElement.textContent = "Error";
+        });
     return formattedDate ;
   }
     }

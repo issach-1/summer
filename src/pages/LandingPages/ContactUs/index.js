@@ -146,7 +146,7 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
-      cellRenderer: (param) => {
+      cellRenderer: (params) => {
         const [formattedDate, setformattedDate] = useState("Loading...");
         db.collection("user").doc(params.value).get().then((doc) => {
           const createTime = doc.createTime.toDate();
@@ -165,7 +165,6 @@ function ContactUs() {
           setformattedDate(`${dayOfWeek}, ${month} ${day}, ${year}`);
         }).catch((error) => {
           console.error("Error getting document:", error);
-          cellElement.textContent = "Error";
         });
     return formattedDate ;
   }

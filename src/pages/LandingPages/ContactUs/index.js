@@ -147,7 +147,7 @@ function ContactUs() {
       editable: false,
       filter: "agTextColumnFilter",
       cellRenderer: (param) => {
-        const [formattedDate, setformattedDate] = useState("Loading...")
+        const [formattedDate, setformattedDate] = useState("Loading...");
         db.collection("user").doc(params.value).get().then((doc) => {
           const createTime = doc.createTime.toDate();
           const monthNames = [
@@ -162,8 +162,8 @@ function ContactUs() {
           const month = monthNames[createTime.getMonth()];
           const day = ("0" + createTime.getDate()).slice(-2);
           const year = createTime.getFullYear();
-          setformattedDate(`${dayOfWeek}, ${month} ${day}, ${year}`)
-        }
+          setformattedDate(`${dayOfWeek}, ${month} ${day}, ${year}`);
+        };
     return formattedDate ;
   }
     }

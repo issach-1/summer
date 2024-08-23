@@ -84,8 +84,10 @@ function FormSimple() {
   const [YearJoined, setYearJoined] = useState("");
   const [Email, setEmail] = useState("");
   const [Ambition, setAmbition] = useState("");
+  const [Time, setTime] = useState("");
   const [UImageURL, setUImageURL] = useState("");
   var arr = [
+    Time,
     FullName,
     EducationalStatus,
     FoundationLevel,
@@ -100,10 +102,41 @@ function FormSimple() {
     PhoneNum,
     YearJoined,
     Email,
-    Ambition
+    Ambition,
   ];
 
   const handelClick = () => {
+    // Array of weekday names
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    // Array of month names
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    // Get today's date
+    const today = new Date();
+
+    // Extract the day of the week, month, date, and year
+    const dayOfWeek = dayNames[today.getDay()];
+    const month = monthNames[today.getMonth()];
+    const day = ("0" + today.getDate()).slice(-2); // Add leading zero if necessary
+    const year = today.getFullYear();
+
+    // Format the date
+    const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+    setTime(formattedDate);
     if (arr.indexOf("") == -1) {
       // var year = Year_v;
       // var month = Month_v;
@@ -137,13 +170,17 @@ function FormSimple() {
             image: UImageURL,
             user_id: userId,
             ambition: Ambition,
-
+            time: Time,
           })
             .then(() => {
-              window.alert(FullName + " was successfully registered as an ARMY");
+              window.alert(
+                FullName + " was successfully registered as an ARMY"
+              );
             })
             .catch((err) => {
-              window.alert("Failed to register user, check console for more information");
+              window.alert(
+                "Failed to register user, check console for more information"
+              );
               console.log(err.message);
             });
         }
@@ -166,7 +203,12 @@ function FormSimple() {
       >
         <MKBox component="section" py={12}>
           <Container>
-            <Grid container justifyContent="center" alignItems="center" flexDirection="column">
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+            >
               <form
                 className={image ? "upload_new" : "upload"}
                 onClick={() => document.querySelector(".file_input").click()}
@@ -182,16 +224,21 @@ function FormSimple() {
                     if (files) {
                       setImage(URL.createObjectURL(files[0]));
                       setUploadImg(files[0]);
-                      const imageRef = ref(storage, `user_imgs/${files[0].fileName + v4()}`);
+                      const imageRef = ref(
+                        storage,
+                        `user_imgs/${files[0].fileName + v4()}`
+                      );
                       uploadBytes(imageRef, files[0])
                         .then(() => {
                           getDownloadURL(imageRef).then((Url) => {
                             setUImageURL(Url);
-                            console.log(Url)
+                            console.log(Url);
                           });
                         })
                         .catch((err) => {
-                          window.alert("Failed to post, check console for more information");
+                          window.alert(
+                            "Failed to post, check console for more information"
+                          );
                           console.log(err.message);
                         });
                     }
@@ -237,7 +284,9 @@ function FormSimple() {
                           row
                           aria-labelledby="edu_radio"
                           name="edu_radio"
-                          onChange={() => setEducationalStatus(event.target.value)}
+                          onChange={() =>
+                            setEducationalStatus(event.target.value)
+                          }
                         >
                           <FormControlLabel
                             value="Highschool"
@@ -270,7 +319,9 @@ function FormSimple() {
                           row
                           aria-labelledby="foundation_radio"
                           name="foundation_radio"
-                          onChange={() => setFoundationLevel(event.target.value)}
+                          onChange={() =>
+                            setFoundationLevel(event.target.value)
+                          }
                         >
                           <FormControlLabel
                             value="Learning 1"
@@ -333,7 +384,10 @@ function FormSimple() {
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <LocalizationProvider fullWidth dateAdapter={AdapterDayjs}>
+                      <LocalizationProvider
+                        fullWidth
+                        dateAdapter={AdapterDayjs}
+                      >
                         <DatePicker
                           fullWidth
                           slotProps={{ textField: { variant: "standard" } }}
@@ -373,7 +427,9 @@ function FormSimple() {
                         fullWidth
                         inputProps={{ style: { textTransform: "capitalize" } }}
                         required
-                        onChange={() => setResidentialAddress(event.target.value)}
+                        onChange={() =>
+                          setResidentialAddress(event.target.value)
+                        }
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -605,16 +661,16 @@ function FormSimple() {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                      <MKInput
-                        variant="standard"
-                        label="Your Ambition"
-                        multiline
-                        fullWidth
-                        required
-                        rows={6}
-                        onChange={() => setAmbition(event.target.value)}
-                      />
-                    </Grid>
+                    <MKInput
+                      variant="standard"
+                      label="Your Ambition"
+                      multiline
+                      fullWidth
+                      required
+                      rows={6}
+                      onChange={() => setAmbition(event.target.value)}
+                    />
+                  </Grid>
                   <Grid container item justifyContent="center" xs={12} my={2}>
                     <MKButton
                       variant="gradient"

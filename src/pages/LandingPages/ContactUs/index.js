@@ -242,7 +242,7 @@ function ContactUs() {
     const newValue = event.newValue; // Get the new value
 
     try {
-      const docRef = doc(db, "users", id);
+      const docRef = doc(db, "users", user_id);
 
       const docSnap = await getDocs(docRef);
 
@@ -251,7 +251,7 @@ function ContactUs() {
           [field]: [newValue], //field which you have to update
         };
         alert(
-          `Document ${id} successfully updated! Field: ${field}, New Value: ${newValue}`
+          `Document ${user_id} successfully updated! Field: ${field}, New Value: ${newValue}`
         );
       } else {
         alert("No such document!");

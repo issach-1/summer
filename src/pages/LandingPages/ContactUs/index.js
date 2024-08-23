@@ -147,7 +147,7 @@ function ContactUs() {
       editable: false,
       filter: "agTextColumnFilter",
       cellRenderer: (param) => {
-    const cellElement = (<P> `timestamp of ${param.value}` </P> ;
+    const cellElement = (<P> `timestamp of ${param.value}` </P>);
     return cellElement;
   }
     }

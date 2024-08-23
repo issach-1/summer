@@ -244,13 +244,14 @@ function ContactUs() {
           const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
           users.push({ ...doc.data(), "time": formatedDate});
           console.log({ ...doc.data(), "time": formatedDate})
-        });
-        setR([...users]);
+        }).then(() => {
+           setR([...users]);
+        })
       })
       .catch((err) => {
         console.log(err.message);
       });
-  })
+  });
 }
   const gridRef = useRef();
   const onBtnExport = useCallback(() => {

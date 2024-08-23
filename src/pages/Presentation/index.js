@@ -81,11 +81,8 @@ function SignInBasic() {
   const [YearJoined, setYearJoined] = useState("");
   const [Email, setEmail] = useState("");
   const [Ambition, setAmbition] = useState("");
-
-  const [Time, setTime] = useState("");
   const [UImageURL, setUImageURL] = useState("");
   var arr = [
-    Time,
     FullName,
     EducationalStatus,
     FoundationLevel,
@@ -104,36 +101,6 @@ function SignInBasic() {
   ];
 
   const handelClick = () => {
-    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    // Array of month names
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    // Get today's date
-    const today = new Date();
-
-    // Extract the day of the week, month, date, and year
-    const dayOfWeek = dayNames[today.getDay()];
-    const month = monthNames[today.getMonth()];
-    const day = ("0" + today.getDate()).slice(-2); // Add leading zero if necessary
-    const year = today.getFullYear();
-
-    // Format the date
-    const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-    setTime(formattedDate);
     if (arr.indexOf("") == -1) {
       // var year = Year_v;
       // var month = Month_v;
@@ -148,6 +115,31 @@ function SignInBasic() {
         if (UImageURL) {
           console.log("url: ", UImageURL);
           let userId = FullName.split(" ").join("_") + PhoneNum;
+          const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+          // Array of month names
+          const monthNames = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+
+          let today = new Date();
+          let dayOfWeek = dayNames[today.getDay()];
+          let month = monthNames[today.getMonth()];
+          let day = ("0" + today.getDate()).slice(-2);
+          let year = today.getFullYear();
+
+          let formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
           setDoc(doc(db, "users", userId), {
             age: Age,
             name: FullName.toLowerCase(),
@@ -167,7 +159,7 @@ function SignInBasic() {
             image: UImageURL,
             user_id: userId,
             ambition: Ambition,
-            time: Time,
+            time: formattedDate,
           })
             .then(() => {
               window.alert(

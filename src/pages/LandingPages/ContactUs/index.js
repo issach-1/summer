@@ -251,7 +251,7 @@ function ContactUs() {
         if (field == "name") {
             await updateDoc(docRef),
               {
-                name: newValue, //field which you have to update
+                name: "updated", //field which you have to update
               };
           } else if (field == "payed") {
             await updateDoc(docRef),

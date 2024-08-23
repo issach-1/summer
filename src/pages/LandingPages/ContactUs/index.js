@@ -49,6 +49,7 @@ function ContactUs() {
       headerName: "Name",
       width: 200,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "age",
@@ -56,6 +57,7 @@ function ContactUs() {
       headerName: "Age",
       width: 80,
       filter: "agNumberColumnFilter",
+      editable: true,
     },
     {
       field: "phone_number",
@@ -71,6 +73,7 @@ function ContactUs() {
       width: 150,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "t_size",
@@ -79,6 +82,7 @@ function ContactUs() {
       width: 100,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "c_size",
@@ -87,6 +91,7 @@ function ContactUs() {
       width: 100,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "payed",
@@ -95,6 +100,7 @@ function ContactUs() {
       width: 150,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "foundation_level",
@@ -103,6 +109,7 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "year_joined",
@@ -111,6 +118,7 @@ function ContactUs() {
       width: 150,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "educational_status",
@@ -119,6 +127,7 @@ function ContactUs() {
       width: 150,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "residential_address",
@@ -127,6 +136,7 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "school_name",
@@ -135,6 +145,7 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "school_address",
@@ -143,6 +154,7 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
+      editable: true,
     },
     {
       field: "time",

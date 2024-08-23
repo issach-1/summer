@@ -197,7 +197,6 @@ function ContactUs() {
     getDocs(colref)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          let formattedDate = "Loading...";
           const createTime = doc.createTime.toDate();
           const monthNames = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
@@ -211,7 +210,7 @@ function ContactUs() {
           const month = monthNames[createTime.getMonth()];
           const day = ("0" + createTime.getDate()).slice(-2);
           const year = createTime.getFullYear();
-          formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+          const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
           users.push({ ...doc.data(), "time": formatedDate});
           console.log({ ...doc.data(), "time": formatedDate})
           

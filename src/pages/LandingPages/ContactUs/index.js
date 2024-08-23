@@ -252,7 +252,7 @@ function ContactUs() {
           [field]: chn, //field which you have to update
         };
         alert(
-          `Document ${user_id} successfully updated! Field: ${field}, New Value: ${newValue}`
+          `Document ${user_id} successfully updated! Field: ${field}, New Value: ${chn}`
         );
       } else {
         alert("No such document!");

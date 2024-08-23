@@ -239,8 +239,9 @@ function ContactUs() {
   const onCellValueChanged = async (event) => {
     const { user_id } = event.data; // Get the document ID
     const field = event.colDef.field; // Get the field/column that was edited
-    const newValue = toString(event.newValue); // Get the new value
-
+    const [chn, setchn] = useState("-")
+    const newValue = event.newValue ; // Get the new value
+    setchn(newValue)
     try {
       const docRef = doc(db, "users", user_id);
 
@@ -248,7 +249,7 @@ function ContactUs() {
 
       if (docSnap.exists()) {
         await updateDoc(docRef), {
-          [field]: newValue, //field which you have to update
+          [field]: chn, //field which you have to update
         };
         alert(
           `Document ${user_id} successfully updated! Field: ${field}, New Value: ${newValue}`

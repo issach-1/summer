@@ -27,13 +27,13 @@ function ContactUs() {
       headerName: "Num",
       checkboxSelection: true,
       valueGetter: "node.rowIndex + 1",
-      width: 100,
-      minWidth: 70,
+      width: 130,
+      minWidth: 130,
     },
     {
       field: "image",
-      minWidth: 130,
-      width: 130,
+      minWidth: 100,
+      width: 100,
       headerName: "",
       filter: false,
       sortable: false,
@@ -71,7 +71,7 @@ function ContactUs() {
     {
       field: "cloth",
       editable: true,
-      minWidth: 100,
+      minWidth: 130,
       headerName: "Cloth Type",
       width: 150,
       filter: "agTextColumnFilter",
@@ -239,7 +239,7 @@ function ContactUs() {
   const gridRef = useRef();
   const onCellValueChanged = async (event) => {
     const { user_id } = event.data; // Get the document ID
-    const field = event.colDef.field; // Get the field/column that was edited
+    const Field = event.colDef.field; // Get the field/column that was edited
     const newValue = event.newValue ; // Get the new value
     setchn(newValue)
     try {
@@ -249,7 +249,7 @@ function ContactUs() {
 
       if (docSnap.exists()) {
         await updateDoc(docRef), {
-          [field]: chn, //field which you have to update
+          `${Field}`: chn, //field which you have to update
         };
         alert(
           `Document ${user_id} successfully updated! Field: ${field}, New Value: ${chn}`

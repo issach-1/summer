@@ -21,6 +21,7 @@ import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the 
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 function ContactUs() {
+    const [chn, setchn] = useState("-");
   const columns6 = [
     {
       headerName: "Num",
@@ -239,7 +240,6 @@ function ContactUs() {
   const onCellValueChanged = async (event) => {
     const { user_id } = event.data; // Get the document ID
     const field = event.colDef.field; // Get the field/column that was edited
-    const [chn, setchn] = useState("-")
     const newValue = event.newValue ; // Get the new value
     setchn(newValue)
     try {

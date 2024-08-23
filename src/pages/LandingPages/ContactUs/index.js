@@ -240,7 +240,7 @@ const dayNames = [
       
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          users.push({ ...doc.data(), time});
+          users.push({ ...doc.data()});
         });
         setR([...users]);
       })

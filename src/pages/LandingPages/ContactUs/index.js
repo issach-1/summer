@@ -257,7 +257,8 @@ function ContactUs() {
         alert("No such document!");
       }
     } catch (error) {
-      alert("Error updating document: ", `${error}`);
+      alert(`Error updating document: ${error}`);
+      console.log("Error updating document: ", error)
     }
   };
   const onBtnExport = useCallback(() => {

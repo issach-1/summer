@@ -254,10 +254,10 @@ function ContactUs() {
           `Document ${id} successfully updated! Field: ${field}, New Value: ${newValue}`
         );
       } else {
-        console.log("No such document!");
+        alert("No such document!");
       }
     } catch (error) {
-      console.error("Error updating document: ", error);
+      alert("Error updating document: ", error);
     }
   };
   const onBtnExport = useCallback(() => {

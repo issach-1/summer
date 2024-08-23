@@ -150,8 +150,9 @@ function ContactUs() {
       const Uid_cell = params.value;
       
       // Display a loading indicator or placeholder while fetching the data
-      const cellElement = document.createElement('span');
-      cellElement.textContent = "Loading...";
+      let cellElement = <P>
+          "Loading..."
+</P>
 
       // Fetch data from Firestore asynchronously
       db.collection("user").doc(Uid_cell).get().then((doc) => {
@@ -176,13 +177,14 @@ const dayNames = [
           const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
 
           // Update the cell content with the fetched date
-          cellElement.textContent = formattedDate;
+          cellElement =  cellElement = <P>
+            {formattedDate}
+</P>;
         } else {
-          cellElement.textContent = "Not found";
+          null
         }
       }).catch((error) => {
         console.log("Error getting document:", error);
-        cellElement.textContent = "Error";
       });
 
       // Return the DOM element for the cell

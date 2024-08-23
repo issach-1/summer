@@ -169,6 +169,7 @@ function ContactUs() {
            ${formattedDate}
         </p>                                                        
       )
+      }
     }
     
   ];

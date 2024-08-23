@@ -196,7 +196,7 @@ function ContactUs() {
 
     getDocs(colref)
       .then((snapshot) => {
-        snapshot.docs.forEach(documentSnapshot, (doc) => {
+        snapshot.docs.forEach(documentSnapshot=> {
           let createTime = documentSnapshot.createTime.toDate();
           const monthNames = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
@@ -211,8 +211,8 @@ function ContactUs() {
           const day = ("0" + createTime.getDate()).slice(-2);
           const year = createTime.getFullYear();
           const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-          users.push({ ...doc.data(), "time": formatedDate});
-          console.log({ ...doc.data(), "time": formatedDate})
+          users.push({ ...documentSnapshot.data(), "time": formatedDate});
+          console.log({ ...documentSnapshot.data(), "time": formatedDate})
           
         }).catch((error) => {
           console.error("Error getting document:", error);
@@ -227,8 +227,7 @@ function ContactUs() {
     const colref = collection(db, "users");
     getDocs(colref)
       .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-           snapshot.docs.forEach(documentSnapshot, (doc) => {
+        snapshot.docs.forEach(documentSnapshot => {
           let createTime = documentSnapshot.createTime;
           const monthNames = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", 

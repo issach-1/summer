@@ -15,6 +15,15 @@ import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the 
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 function ContactUs() {
+  const monthNames = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+const dayNames = [
+    "Sun", "Mon", "Tue", "Wed", 
+    "Thu", "Fri", "Sat"
+];
   const columns6 = [
     {
       headerName: "Num",
@@ -137,6 +146,34 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
+    }, 
+         {
+      field: "	user_id",
+      minWidth: 150,
+      headerName: "Time Stamp",
+      width: 200,
+      editable: false,
+      filter: "agTextColumnFilter",
+      valueFormatter: params => {
+        const Uid_cell = params.value;
+        let docRef = db.collection("user").doc(Uid_cell);
+        docRef.get().then((doc) => {
+          if (doc.exists) {
+            const createTime = doc.createTime.toDate(); // This returns a JavaScript Date object
+          } else {
+              console.log("No such document!");
+          }
+          }).catch((error) => {
+              console.log("Error getting document:", error);
+        });
+        const dayOfWeek = dayNames[createTime.getDay()]; // getDay() returns 0-6, where 0 is Sunday
+        const month = monthNames[createTime.getMonth()]; // getMonth() is zero-based
+        const day = ("0" + createTime.getDate()).slice(-2);
+        const year = createTime.getFullYear();
+
+        const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+          return formattedDate;
+        }
     },
     
   ];
@@ -186,9 +223,10 @@ function ContactUs() {
     const colref = collection(db, "users");
 
     getDocs(colref)
+      
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
-          users.push({ ...doc.data() });
+          users.push({ ...doc.data(), time});
         });
         setR([...users]);
       })

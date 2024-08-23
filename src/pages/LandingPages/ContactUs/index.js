@@ -210,7 +210,7 @@ function ContactUs() {
           const month = monthNames[createTime.getMonth()];
           const day = ("0" + createTime.getDate()).slice(-2);
           const year = createTime.getFullYear();
-          const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+          const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
           users.push({ ...doc.data(), "time": formatedDate});
           console.log({ ...doc.data(), "time": formatedDate})
           

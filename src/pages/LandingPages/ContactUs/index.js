@@ -21,7 +21,7 @@ import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the 
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 function ContactUs() {
-    const [chn, setchn] = useState("-");
+  const [chn, setchn] = useState("-");
   const columns6 = [
     {
       headerName: "Num",
@@ -240,86 +240,87 @@ function ContactUs() {
   const onCellValueChanged = async (event) => {
     const { user_id } = event.data; // Get the document ID
     const field = event.colDef.field; // Get the field/column that was edited
-    const newValue = event.newValue ; // Get the new value
-    setchn(newValue)
+    const newValue = event.newValue; // Get the new value
     console.log(field, newValue, user_id);
-    console.log(typeof field, typeof newValue, typeof user_id)
+    console.log(typeof field, typeof newValue, typeof user_id);
     try {
       const docRef = doc(db, "users", user_id);
 
-      const docSnap = await getDocs(docRef);
-
-      if (docSnap.exists()) {
-        if (field == "name") {
-            await updateDoc(docRef),
+      getDocs(docRef)
+        .then((doc) => {
+          if (field == "name") {
+            updateDoc(doc),
               {
-                name: "updated", //field which you have to update
+                name: newValue, //field which you have to update
               };
           } else if (field == "payed") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 payed: newValue, //field which you have to update
               };
           } else if (field == "phone_number") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 phone_number: newValue, //field which you have to update
               };
           } else if (field == "residential_address") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 residential_address: newValue, //field which you have to update
               };
           } else if (field == "cloth") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 cloth: newValue, //field which you have to update
               };
           } else if (field == "educational_status") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 educational_status: newValue, //field which you have to update
               };
           } else if (field == "foundation_level") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 foundation_level: newValue, //field which you have to update
               };
           } else if (field == "school_address") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 school_address: newValue, //field which you have to update
               };
           } else if (field == "t_size") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 t_size: newValue, //field which you have to update
               };
           } else if (field == "c_size") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 c_size: newValue, //field which you have to update
               };
           } else if (field == "age") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 age: newValue, //field which you have to update
               };
           } else if (field == "school_name") {
-            await updateDoc(docRef),
+            updateDoc(doc),
               {
                 school_name: newValue, //field which you have to update
               };
           }
-        alert(
-          `Document successfully updated! Field: ${field}, New Value: ${chn}`
-        );
-      } else {
-        alert("No such document!");
-      }
+          alert(
+            `Document successfully updated! Field: ${field}, New Value: ${newValue}`
+          );
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     } catch (error) {
-      alert(`Field: ${field}, New Value: ${newValue} \n Error updating document: ${error}`);
-      console.log("Error updating document: ", error)
+      alert(
+        `Field: ${field}, New Value: ${newValue} \n Error updating document: ${error}`
+      );
+      console.log("Error updating document: ", error);
     }
   };
   const onBtnExport = useCallback(() => {

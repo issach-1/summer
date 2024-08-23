@@ -24,6 +24,7 @@ function ContactUs() {
   const columns6 = [
     {
       headerName: "Num",
+      checkboxSelection: true,
       valueGetter: "node.rowIndex + 1",
       width: 100,
       minWidth: 70,
@@ -33,7 +34,6 @@ function ContactUs() {
       minWidth: 130,
       width: 130,
       headerName: "",
-      checkboxSelection: true,
       filter: false,
       sortable: false,
       cellRenderer: (params) => (
@@ -49,18 +49,19 @@ function ContactUs() {
       headerName: "Name",
       width: 200,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "age",
+      editable: true,
       minWidth: 80,
       headerName: "Age",
       width: 80,
       filter: "agNumberColumnFilter",
-      editable: true
     },
     {
       field: "phone_number",
+      editable: true,
       minWidth: 150,
       headerName: "Phone Number",
       filter: "agNumberColumnFilter",
@@ -68,93 +69,83 @@ function ContactUs() {
     },
     {
       field: "cloth",
+      editable: true,
       minWidth: 100,
       headerName: "Cloth Type",
       width: 150,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
     },
     {
       field: "t_size",
+      editable: true,
       minWidth: 80,
       headerName: "T-shirt Size",
       width: 100,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
     },
     {
       field: "c_size",
+      editable: true,
       minWidth: 80,
       headerName: "Crew-neck Size",
       width: 100,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
     },
     {
       field: "payed",
+      editable: true,
       minWidth: 80,
       headerName: "Payment",
       width: 150,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
     },
     {
       field: "foundation_level",
       minWidth: 150,
       headerName: "Foundation Level",
       width: 200,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "year_joined",
       minWidth: 100,
       headerName: "Year joined (to GLC)",
       width: 150,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "educational_status",
       minWidth: 100,
       headerName: "Educational Status",
       width: 150,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "residential_address",
       minWidth: 150,
       headerName: "Residential Address",
       width: 200,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "school_name",
       minWidth: 150,
       headerName: "School Name",
       width: 200,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "school_address",
       minWidth: 150,
       headerName: "School Address",
       width: 200,
-      editable: false,
       filter: "agTextColumnFilter",
-      editable: true
+      editable: true,
     },
     {
       field: "time",

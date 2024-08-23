@@ -217,17 +217,37 @@ function ContactUs() {
     const colref = collection(db, "users");
     getDocs(colref)
       .then((snapshot) => {
-        snapshot.docs
-          .forEach((doc) => {
-            users.push({ ...doc.data() });
-            setR([...users]);
-          })
+        snapshot.docs.forEach((doc) => {
+          users.push({ ...doc.data() });
+          setR([...users]);
+        });
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
   const gridRef = useRef();
+  const onCellValueChanged = async (event) => {
+    const { id } = event.data; // Get the document ID
+    const field = event.colDef.field; // Get the field/column that was edited
+    const newValue = event.newValue; // Get the new value
+
+    try {
+      const docRef = doc(db, "users", id);
+
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        // Step 3: Use updateDoc to update specific fields in the document
+        await updateDoc(docRef, { [field]: newValue });
+        alert(`Document ${id} successfully updated! Field: ${field}, New Value: ${newValue}`);
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+  };
   const onBtnExport = useCallback(() => {
     gridRef.current.api.exportDataAsCsv();
   }, []);
@@ -267,6 +287,7 @@ function ContactUs() {
             rowSelection={"single"}
             suppressExcelExport={true}
             onRowSelected={Deleteon ? onRowSelected : null}
+            onCellValueChanged={onCellValueChanged}
             // onSelectionChanged={onSelectionChanged}
           />
         </div>

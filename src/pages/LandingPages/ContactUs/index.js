@@ -146,50 +146,29 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
-      cellRenderer: params => {
-      const Uid_cell = params.value;
-      
-      // Display a loading indicator or placeholder while fetching the data
-      let cellElement = (
-        <p> Loading... </p>
-      );
-
-      // Fetch data from Firestore asynchronously
-      db.collection("user").doc(Uid_cell).get().then((doc) => {
-        if (doc.exists) {
-          const createTime = doc.createTime.toDate();
-
-          const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
-const dayNames = [
-    "Sun", "Mon", "Tue", "Wed", 
-    "Thu", "Fri", "Sat"
-];
-
-          const dayOfWeek = dayNames[createTime.getDay()];
-          const month = monthNames[createTime.getMonth()];
-          const day = ("0" + createTime.getDate()).slice(-2);
-          const year = createTime.getFullYear();
-
-          const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-
-          // Update the cell content with the fetched date
-          cellElement = (
-        <p> {formattedDate } </p>
-      );
-        } else {
-          null
+      cellrenderer: (params) => (
+        <p> {
+          let formattedDate = "Loading..."
+          db.collection("user").doc(params.value).get().then((doc) => {
+            const createTime = doc.createTime.toDate();
+            const monthNames = [
+              "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+              const dayNames = [
+                  "Sun", "Mon", "Tue", "Wed", 
+                  "Thu", "Fri", "Sat"
+              ];
+            const dayOfWeek = dayNames[createTime.getDay()];
+            const month = monthNames[createTime.getMonth()];
+            const day = ("0" + createTime.getDate()).slice(-2);
+            const year = createTime.getFullYear();
+            formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+          }
+           ${formattedDate }
         }
-      }).catch((error) => {
-        console.log("Error getting document:", error);
-      });
-
-      // Return the DOM element for the cell
-      return cellElement;
-    }
+        </p>                                                        
+      )
     }
     
   ];

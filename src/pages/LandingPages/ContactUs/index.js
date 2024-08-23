@@ -113,7 +113,7 @@ function ContactUs() {
       headerName: "Year joined (to GLC)",
       width: 150,
       filter: "agTextColumnFilter",
-      editable: true,
+      editable: false,
     },
     {
       field: "educational_status",
@@ -239,7 +239,7 @@ function ContactUs() {
   const onCellValueChanged = async (event) => {
     const { user_id } = event.data; // Get the document ID
     const field = event.colDef.field; // Get the field/column that was edited
-    const newValue = event.newValue; // Get the new value
+    const newValue = toString(event.newValue); // Get the new value
 
     try {
       const docRef = doc(db, "users", user_id);

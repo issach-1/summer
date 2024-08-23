@@ -248,7 +248,7 @@ function ContactUs() {
 
       if (docSnap.exists()) {
         await updateDoc(docRef), {
-          [field]: [newValue], //field which you have to update
+          [field]: newValue, //field which you have to update
         };
         alert(
           `Document ${user_id} successfully updated! Field: ${field}, New Value: ${newValue}`

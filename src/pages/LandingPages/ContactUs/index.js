@@ -146,30 +146,11 @@ function ContactUs() {
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
-      cellrenderer: (params) =>  {
-        let formattedDate = "Loading..."
-        db.collection("user").doc(params.value).get().then((doc) => {
-          const createTime = doc.createTime.toDate();
-          const monthNames = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-          ];
-            const dayNames = [
-                "Sun", "Mon", "Tue", "Wed", 
-                "Thu", "Fri", "Sat"
-            ];
-          const dayOfWeek = dayNames[createTime.getDay()];
-          const month = monthNames[createTime.getMonth()];
-          const day = ("0" + createTime.getDate()).slice(-2);
-          const year = createTime.getFullYear();
-          formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-        }
-       return (
-        <p>
-           ${formattedDate}
-        </p>                                                        
-      )
-      }
+      cellRenderer: (param) => {
+    const cellElement = document.createElement('span');
+    cellElement.textContent = `timestamp of ${param.value}`;
+    return cellElement;
+  }
     }
     
   ];

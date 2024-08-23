@@ -9,19 +9,18 @@ import "./style.css";
 import alt_img from "../../../assets/icons/alt_img.png";
 import MKTypography from "components/MKTypography";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import RefreshIcon from '@mui/icons-material/Refresh';
+import RefreshIcon from "@mui/icons-material/Refresh";
 import { AgGridReact } from "ag-grid-react"; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 function ContactUs() {
-  
   const columns6 = [
     {
       headerName: "Num",
       valueGetter: "node.rowIndex + 1",
       width: 100,
-      minWidth:70,
+      minWidth: 70,
     },
     {
       field: "image",
@@ -106,7 +105,7 @@ function ContactUs() {
       width: 150,
       editable: false,
       filter: "agTextColumnFilter",
-    },  
+    },
     {
       field: "educational_status",
       minWidth: 100,
@@ -114,8 +113,8 @@ function ContactUs() {
       width: 150,
       editable: false,
       filter: "agTextColumnFilter",
-    }, 
-        {
+    },
+    {
       field: "residential_address",
       minWidth: 150,
       headerName: "Residential Address",
@@ -123,38 +122,43 @@ function ContactUs() {
       editable: false,
       filter: "agTextColumnFilter",
     },
-        {
+    {
       field: "school_name",
       minWidth: 150,
       headerName: "School Name",
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
-    }, 
-         {
+    },
+    {
       field: "school_address",
       minWidth: 150,
       headerName: "School Address",
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
-    }, 
-         {
+    },
+    {
       field: "	time",
       minWidth: 150,
       headerName: "Time Stamp",
       width: 200,
       editable: false,
       filter: "agTextColumnFilter",
-    }
-    
+    },
   ];
 
   const onRowSelected = useCallback(
     (event) => {
       if (event.node.isSelected()) {
         if (confirm("Delete " + event.node.data.name + "?")) {
-          deleteDoc(doc(db, "users", event.node.data.name.split(" ")[0] + event.node.data.phone_number))
+          deleteDoc(
+            doc(
+              db,
+              "users",
+              event.node.data.name.split(" ")[0] + event.node.data.phone_number
+            )
+          )
             .then(() => {
               window.alert("Document successfully deleted!");
             })
@@ -196,28 +200,38 @@ function ContactUs() {
 
     getDocs(colref)
       .then((snapshot) => {
-        snapshot.docs.forEach(documentSnapshot=> {
-          let createTime = documentSnapshot.createTime.toDate();
-          const monthNames = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-          ];
-            const dayNames = [
-                "Sun", "Mon", "Tue", "Wed", 
-                "Thu", "Fri", "Sat"
+        snapshot.docs
+          .forEach((documentSnapshot) => {
+            let createTime = documentSnapshot.createTime.toDate();
+            const monthNames = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
             ];
-          const dayOfWeek = dayNames[createTime.getDay()];
-          const month = monthNames[createTime.getMonth()];
-          const day = ("0" + createTime.getDate()).slice(-2);
-          const year = createTime.getFullYear();
-          const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-          users.push({ ...documentSnapshot.data(), "time": formatedDate});
-          console.log({ ...documentSnapshot.data(), "time": formatedDate})
-          
-        }).catch((error) => {
-          console.error("Error getting document:", error);
-        });
-        setR([...users]);
+            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const dayOfWeek = dayNames[createTime.getDay()];
+            const month = monthNames[createTime.getMonth()];
+            const day = ("0" + createTime.getDate()).slice(-2);
+            const year = createTime.getFullYear();
+            const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+            users.push({ ...documentSnapshot.data(), time: formatedDate });
+            console.log({ ...documentSnapshot.data(), time: formatedDate });
+          })
+          .then(() => {
+            setR([...users]);
+          })
+          .catch((error) => {
+            console.error("Error getting document:", error);
+          });
       })
       .catch((err) => {
         console.log(err.message);
@@ -227,32 +241,40 @@ function ContactUs() {
     const colref = collection(db, "users");
     getDocs(colref)
       .then((snapshot) => {
-        snapshot.docs.forEach(documentSnapshot => {
-          let createTime = documentSnapshot.createTime;
-          const monthNames = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-          ];
-            const dayNames = [
-                "Sun", "Mon", "Tue", "Wed", 
-                "Thu", "Fri", "Sat"
+        snapshot.docs
+          .forEach((documentSnapshot) => {
+            let createTime = documentSnapshot.createTime;
+            const monthNames = [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
             ];
-          const dayOfWeek = dayNames[createTime.getDay()];
-          const month = monthNames[createTime.getMonth()];
-          const day = ("0" + createTime.getDate()).slice(-2);
-          const year = createTime.getFullYear();
-          const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
-          users.push({ ...doc.data(), "time": formatedDate});
-          console.log({ ...doc.data(), "time": formatedDate})
-        }).then(() => {
-           setR([...users]);
-        })
+            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const dayOfWeek = dayNames[createTime.getDay()];
+            const month = monthNames[createTime.getMonth()];
+            const day = ("0" + createTime.getDate()).slice(-2);
+            const year = createTime.getFullYear();
+            const formatedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+            users.push({ ...doc.data(), time: formatedDate });
+            console.log({ ...doc.data(), time: formatedDate });
+          })
+          .then(() => {
+            setR([...users]);
+          });
       })
       .catch((err) => {
         console.log(err.message);
       });
-  });
-}
+  };
   const gridRef = useRef();
   const onBtnExport = useCallback(() => {
     gridRef.current.api.exportDataAsCsv();
@@ -261,13 +283,18 @@ function ContactUs() {
   return (
     <BaseLayout
       title="Registered members"
-      breadcrumb={[{ label: "Add members", route: "/home" }, { label: "Registered members" }]}
+      breadcrumb={[
+        { label: "Add members", route: "/home" },
+        { label: "Registered members" },
+      ]}
     >
       <MKTypography variant="caption" color="text" className="dis">
-        Please use a larger screen to view the whole data (or enable desktop mode on your mobile
-        browser)
+        Please use a larger screen to view the whole data (or enable desktop
+        mode on your mobile browser)
       </MKTypography>
-      <button className="down" onClick={onBtnExport}>Download CSV export file</button>
+      <button className="down" onClick={onBtnExport}>
+        Download CSV export file
+      </button>
       <Grid
         className="wide"
         container
@@ -276,7 +303,10 @@ function ContactUs() {
         flexDirection="column"
         sx={{ mt: 10 }}
       >
-        <div className={"ag-theme-quartz"} style={{ width: "90%", height: 637 }}>
+        <div
+          className={"ag-theme-quartz"}
+          style={{ width: "90%", height: 637 }}
+        >
           <AgGridReact
             rowData={rows}
             ref={gridRef}
@@ -284,7 +314,7 @@ function ContactUs() {
             defaultColDef={defaultColDef}
             rowSelection={"single"}
             suppressExcelExport={true}
-            onRowSelected={ Deleteon ? onRowSelected : null}
+            onRowSelected={Deleteon ? onRowSelected : null}
             // onSelectionChanged={onSelectionChanged}
           />
         </div>
@@ -299,9 +329,12 @@ function ContactUs() {
           right: 16,
         }}
       >
-        <div onClick={() => {
-          toggleDel()
-        }} className={Deleteon? "dele" : "dele_off"}>
+        <div
+          onClick={() => {
+            toggleDel();
+          }}
+          className={Deleteon ? "dele" : "dele_off"}
+        >
           <DeleteRoundedIcon calssName="delesvg" />
         </div>
       </Box>
@@ -315,9 +348,12 @@ function ContactUs() {
           left: 16,
         }}
       >
-        <div onClick={() => {
-          refresh()
-        }} className="dele_off">
+        <div
+          onClick={() => {
+            refresh();
+          }}
+          className="dele_off"
+        >
           <RefreshIcon calssName="delesvg" />
         </div>
       </Box>

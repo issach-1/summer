@@ -152,7 +152,7 @@ function ContactUs() {
       // Display a loading indicator or placeholder while fetching the data
       let cellElement = (
         <p> Loading... </p>
-      ),
+      );
 
       // Fetch data from Firestore asynchronously
       db.collection("user").doc(Uid_cell).get().then((doc) => {
@@ -179,7 +179,7 @@ const dayNames = [
           // Update the cell content with the fetched date
           cellElement = (
         <p> {formattedDate } </p>
-      ),
+      );
         } else {
           null
         }
